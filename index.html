@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영독작 Lesson 6-1 분석 | 에듀케레 영수학원</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1a2744; --gold:#c8a84b;
+  --navy-soft:#22335a; --line:#e4e7ee;
+  --bg:#f5f6f9; --ink:#222a3b; --muted:#6b7488;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;}
+a{color:inherit;text-decoration:none;}
+
+.sidebar{position:fixed;top:0;left:0;width:280px;height:100vh;background:var(--navy);
+  color:#fff;padding:34px 22px;overflow-y:auto;z-index:50;}
+.sb-brand{font-family:'Playfair Display',serif;font-size:13px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+.sb-acad{font-size:20px;font-weight:900;margin-top:6px;}
+.sb-lesson{font-size:13px;color:#c3ccdd;margin-top:4px;}
+.sb-rule{height:1px;background:rgba(255,255,255,.15);margin:24px 0;}
+.sb-nav button{display:block;width:100%;text-align:left;background:transparent;border:none;color:#cdd5e4;
+  font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:500;padding:13px 16px;border-radius:10px;
+  cursor:pointer;margin-bottom:6px;transition:.18s;}
+.sb-nav button:hover{background:var(--navy-soft);color:#fff;}
+.sb-nav button.active{background:var(--gold);color:var(--navy);font-weight:700;}
+.sb-num{display:inline-block;width:24px;font-weight:700;color:var(--gold);}
+.sb-nav button.active .sb-num{color:var(--navy);}
+.sb-foot{margin-top:30px;font-size:12px;color:#9aa6bd;line-height:1.6;}
+
+.main{margin-left:280px;padding:46px 56px 90px;max-width:1000px;}
+.tab{display:none;}
+.tab.show{display:block;animation:fade .25s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+.cover{background:linear-gradient(135deg,var(--navy) 0%,#26365f 100%);color:#fff;border-radius:18px;
+  padding:54px 48px;margin-bottom:36px;position:relative;overflow:hidden;}
+.cover::after{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;
+  border:2px solid rgba(200,168,75,.35);border-radius:50%;}
+.cover .eyebrow{font-family:'Playfair Display',serif;letter-spacing:3px;color:var(--gold);font-size:14px;text-transform:uppercase;}
+.cover h1{font-size:32px;font-weight:900;margin:14px 0 6px;line-height:1.25;}
+.cover .sub{font-family:'EB Garamond',serif;font-style:italic;font-size:19px;color:#d9e0ef;}
+.cover .acad{margin-top:26px;font-size:15px;font-weight:700;color:var(--gold);}
+.cover .acad span{display:block;font-size:12px;font-weight:400;color:#aebbd4;margin-top:3px;letter-spacing:.5px;}
+
+.sec-h{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+.sec-h .badge{background:var(--gold);color:var(--navy);font-weight:900;width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:18px;}
+.sec-h h2{font-size:23px;font-weight:900;color:var(--navy);}
+.sec-h .en{font-family:'EB Garamond',serif;font-style:italic;color:var(--muted);font-size:15px;margin-left:auto;}
+
+.subsec{display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:700;
+  padding:6px 16px;border-radius:30px;margin:30px 0 14px;letter-spacing:.4px;}
+
+.enbox{background:#fff;border:1px solid #cccccc;border-left:5px solid #2E75B6;border-radius:8px;
+  padding:16px 20px;font-family:'EB Garamond',serif;font-size:17px;line-height:1.6;color:#1f2a44;margin:0 0 6px;}
+.full .enbox{margin-bottom:14px;}
+.snum{display:inline-block;background:var(--navy);color:var(--gold);font-family:'Noto Sans KR';font-size:13px;
+  font-weight:700;width:24px;height:24px;border-radius:50%;text-align:center;line-height:24px;margin-right:8px;
+  vertical-align:1px;}
+
+.scard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:22px;
+  box-shadow:0 2px 10px rgba(26,39,68,.05);}
+.slit{background:#f7f8fb;border-radius:8px;padding:12px 16px;font-size:14.5px;color:#34405c;margin:10px 0 4px;}
+.slit b{color:var(--navy);}
+.strans{font-size:15px;color:#2b3349;font-weight:500;padding:4px 2px 12px;}
+.gram{margin-top:8px;}
+.gline{font-size:14px;padding:5px 0;}
+.g-item{font-weight:700;color:#7F6000;background:#FFF2CC;padding:2px 8px;border-radius:5px;}
+.g-ex{color:#1f4e79;}
+.g-ex .en{font-family:'EB Garamond',serif;font-style:italic;}
+.g-pt{color:#375623;background:#E2EFDA;padding:2px 8px;border-radius:5px;}
+.gmark{font-weight:900;margin-right:5px;}
+.gmark.d{color:var(--gold);}
+.gmark.t{color:#2E75B6;}
+.gmark.s{color:#c0392b;}
+
+.voc{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:13px 18px;margin-bottom:9px;flex-wrap:wrap;}
+.voc .w{font-family:'EB Garamond',serif;font-weight:600;font-size:18px;color:var(--navy);min-width:150px;}
+.voc .pos{font-size:12px;font-weight:700;color:#fff;background:var(--gold);padding:2px 9px;border-radius:20px;}
+.voc .mean{font-size:15px;color:#2b3349;flex:1;min-width:160px;}
+.voc .deriv{font-size:13px;color:#375623;background:#E2EFDA;padding:3px 10px;border-radius:6px;}
+.exp-h{font-size:16px;font-weight:800;color:var(--navy);margin:26px 0 12px;border-bottom:2px solid var(--gold);
+  display:inline-block;padding-bottom:4px;}
+.phrase{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:8px;
+  padding:11px 16px;margin-bottom:8px;font-size:14.5px;}
+.phrase .en{font-family:'EB Garamond',serif;font-weight:600;color:var(--navy);}
+
+.trans-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 30px;
+  font-size:16px;line-height:2;color:#2b3349;}
+.trans-box .subsec{margin-top:22px;}
+.trans-box p{margin-bottom:14px;}
+
+.tcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:18px;}
+.tcard .lab{font-family:'EB Garamond',serif;font-style:italic;color:var(--gold);font-weight:600;font-size:15px;letter-spacing:1px;}
+.tcard .big{font-size:18px;font-weight:700;color:var(--navy);margin-top:6px;}
+.tcard .body{font-size:15.5px;color:#2b3349;margin-top:6px;}
+.flow{display:flex;flex-direction:column;gap:0;margin-top:10px;}
+.fstep{background:#f7f8fb;border-left:4px solid var(--navy);padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:10px;}
+.fstep .ph{font-weight:800;color:var(--gold);font-size:13px;}
+.fstep .tx{font-size:15px;color:#2b3349;margin-top:2px;}
+
+.quiz{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:26px;
+  box-shadow:0 2px 10px rgba(26,39,68,.05);}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.qno{background:var(--navy);color:var(--gold);font-weight:800;font-size:14px;padding:5px 13px;border-radius:30px;}
+.qtype{font-size:13px;font-weight:700;color:var(--muted);}
+.qstem{font-size:15.5px;font-weight:600;color:#23304d;margin-bottom:8px;}
+.qpassage{background:#f7f8fb;border-radius:8px;padding:14px 18px;font-family:'EB Garamond',serif;font-size:15.5px;
+  line-height:1.7;color:#28324c;margin-bottom:14px;}
+.qpassage u{text-decoration-color:#c0392b;text-underline-offset:3px;}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid #dde1ea;border-radius:10px;
+  padding:12px 16px;font-family:'Noto Sans KR',sans-serif;font-size:14.8px;color:#2b3349;cursor:pointer;
+  margin-bottom:8px;transition:.15s;}
+.opt:hover{border-color:var(--gold);background:#fffdf5;}
+.opt .en{font-family:'EB Garamond',serif;}
+.opt.correct{background:#e8f6ec;border-color:#2e8b57;color:#1c6b3a;font-weight:700;}
+.opt.wrong{background:#fdecec;border-color:#d9534f;color:#a4332f;font-weight:700;}
+.opt.locked{cursor:default;}
+.explain{display:none;background:#fff8e6;border-left:4px solid var(--gold);border-radius:0 8px 8px 0;
+  padding:12px 16px;font-size:14px;color:#5a4a17;margin-top:6px;line-height:1.6;}
+.explain.show{display:block;}
+.qbtns{margin-top:8px;}
+.reset{background:transparent;border:1px solid #cdd5e4;color:var(--muted);font-family:'Noto Sans KR';
+  font-size:13px;padding:7px 15px;border-radius:8px;cursor:pointer;}
+.reset:hover{background:#f0f2f7;}
+
+.essay{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:26px;}
+.essay .cond{font-size:13.5px;color:#7F6000;background:#FFF2CC;border-radius:8px;padding:9px 14px;margin:8px 0 12px;}
+.essay textarea{width:100%;min-height:96px;border:1.5px solid #dde1ea;border-radius:10px;padding:13px 15px;
+  font-family:'Noto Sans KR',sans-serif;font-size:15px;line-height:1.7;color:#23304d;resize:vertical;}
+.essay textarea:focus{outline:none;border-color:var(--gold);}
+.ansbtn{margin-top:10px;background:var(--navy);color:#fff;border:none;font-family:'Noto Sans KR';font-size:14px;
+  font-weight:600;padding:9px 18px;border-radius:9px;cursor:pointer;}
+.ansbtn:hover{background:#26365f;}
+.model{display:none;background:#eef4ec;border-left:4px solid #375623;border-radius:0 8px 8px 0;
+  padding:14px 16px;margin-top:12px;font-size:14.5px;color:#2c4020;line-height:1.7;}
+.model.show{display:block;}
+.model .lab{font-weight:800;color:#375623;display:block;margin-bottom:5px;}
+.model .en{font-family:'EB Garamond',serif;font-style:italic;color:#1f4e79;}
+
+@media(max-width:880px){
+  .sidebar{position:static;width:100%;height:auto;}
+  .main{margin-left:0;padding:24px 18px 70px;}
+  .cover h1{font-size:25px;}
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sb-brand">Educere</div>
+  <div class="sb-acad">에듀케레 영수학원</div>
+  <div class="sb-lesson">영독작 Lesson 6-1</div>
+  <div class="sb-rule"></div>
+  <nav class="sb-nav">
+    <button class="active" onclick="showTab('t1',this)"><span class="sb-num">1</span>전문</button>
+    <button onclick="showTab('t2',this)"><span class="sb-num">2</span>문장분석</button>
+    <button onclick="showTab('t3',this)"><span class="sb-num">3</span>핵심단어 및 표현</button>
+    <button onclick="showTab('t4',this)"><span class="sb-num">4</span>전문해석</button>
+    <button onclick="showTab('t5',this)"><span class="sb-num">5</span>주제와 요지</button>
+    <button onclick="showTab('t6',this)"><span class="sb-num">6</span>변형문제</button>
+  </nav>
+  <div class="sb-foot">
+    경남 양산시 물금읍<br>바른학습관<br>Tel. 055-363-8010
+  </div>
+</aside>
+
+<main class="main">
+
+  <div class="cover">
+    <div class="eyebrow">English Reading &amp; Writing</div>
+    <h1>Many Heads Are<br>Better Than One</h1>
+    <div class="sub">Lesson 6-1 &middot; The Power of Crowdsourcing</div>
+    <div class="acad">에듀케레 영수학원
+      <span>EDUCERE &middot; 영어 독해와 작문 심화 분석</span>
+    </div>
+  </div>
+
+  <section class="tab show full" id="t1">
+    <div class="sec-h"><div class="badge">1</div><h2>전문</h2><span class="en">Full Text</span></div>
+
+    <div class="subsec">Introduction &middot; 크라우드소싱이란?</div>
+    <div class="enbox"><span class="snum">1</span>If two heads are better than one, then what could hundreds of heads accomplish? <span class="snum">2</span>This question was the origin of crowdsourcing. <span class="snum">3</span>The word "crowdsourcing" comes from a combination of the words "crowd" and "outsourcing." <span class="snum">4</span>It is based on the belief that getting input from a large group of people can lead to a better solution. <span class="snum">5</span>Although the term "crowdsourcing" was first coined by a magazine editor in 2005, people have used this method throughout history. <span class="snum">6</span>Let's find out how people have found better solutions to problems by crowdsourcing.</div>
+
+    <div class="subsec">Case 1 &middot; How did the Statue of Liberty get on her feet?</div>
+    <div class="enbox"><span class="snum">7</span>The Statue of Liberty is one of the world's most symbolic monuments. <span class="snum">8</span>However, without the efforts of many ordinary people, this gorgeous statue would have never become one of America's most famous landmarks. <span class="snum">9</span>The magnificent Statue of Liberty was designed by a French sculptor and given as a gift from the French government to the US in the late 1800s. <span class="snum">10</span>The statue was sent to New York in pieces, awaiting assembly. <span class="snum">11</span>Unfortunately, the US government could not afford to fund a base for the statue, so the pieces lay in storage boxes for several months.</div>
+
+    <div class="enbox"><span class="snum">12</span>Then an influential newspaper editor named Joseph Pulitzer had a brilliant idea. <span class="snum">13</span>Using his newspaper, he promoted a fundraising campaign targeted at the general public. <span class="snum">14</span>In just five months, the campaign raised over $100,000 from more than 120,000 donors around the country. <span class="snum">15</span>Most of the donations were less than one dollar. <span class="snum">16</span>However, all together, the money was enough to cover the cost of building the base for the statue. <span class="snum">17</span>There was even enough money left over to give the sculptor a gift!</div>
+
+    <div class="subsec">Case 2 &middot; How have people created the world's most comprehensive encyclopedia?</div>
+    <div class="enbox"><span class="snum">18</span>Wikipedia, a giant online encyclopedia, was actually born from an earlier project known as Nupedia. <span class="snum">19</span>The plan was to publish an online encyclopedia written by experts. <span class="snum">20</span>However, there was a major problem: The content was being written extremely slowly, with only 21 articles written during the first year. <span class="snum">21</span>To accelerate the process of writing content, the plan was changed. <span class="snum">22</span>In the new project, called Wikipedia, permission to write or edit articles was given to anyone with Internet access, not just to the experts alone. <span class="snum">23</span>The scale of collaboration was impressive. <span class="snum">24</span>By the end of the first year, Wikipedia contained more than 20,000 articles in 18 languages. <span class="snum">25</span>Since then, the site has grown rapidly, swelling to more than 40 million articles written in more than 250 languages. <span class="snum">26</span>Every month, Wikipedia receives over 18 billion hits, making it one of the most popular sites on the Internet.</div>
+
+    <div class="enbox"><span class="snum">27</span>Wikipedia enables people from around the world to build a free, shared knowledge base. <span class="snum">28</span>Its volunteer writers and editors, who are united by the joy of sharing their knowledge, have compiled a huge amount of information in a single location and made it available to everyone. <span class="snum">29</span>Thanks to them, we see how much we can achieve and learn when we work together.</div>
+
+    <div class="subsec">Case 3 &middot; How do we observe climate change?</div>
+    <div class="enbox"><span class="snum">30</span>Another form of crowdsourcing is citizen science, which is the practice of public participation and collaboration in scientific research. <span class="snum">31</span>Through citizen science, people collect data and share knowledge for research projects. <span class="snum">32</span>A great example of citizen science is Project BudBurst in the US. <span class="snum">33</span>Ordinary participants in all parts of the country observe and record data about the first appearance of leaves, flowers, and fruits from various plant species in their local areas. <span class="snum">34</span>Then they send their data to a national database. <span class="snum">35</span>Scientists use the accumulated data to learn about how individual plant species respond to climate changes locally, regionally, and nationally. <span class="snum">36</span>They will also use it to detect the possible long-term impacts of climate change by comparing the findings with historical data.</div>
+
+    <div class="enbox"><span class="snum">37</span>Each sample of data, sent in voluntarily by tens of thousands of contributors, is hugely valuable. <span class="snum">38</span>In fact, a research project of this grand scale would be impossible without crowdsourcing.</div>
+
+    <div class="subsec">Conclusion &middot; 집단의 힘</div>
+    <div class="enbox"><span class="snum">39</span>Nowadays, crowdsourcing is being enhanced by technologies such as social media networks and even specially designed crowdsourcing platforms. <span class="snum">40</span>Such networks and platforms make it easier than ever before to take advantage of the combined power of the masses. <span class="snum">41</span>This collective power helps us achieve a lot more than one of us could possibly achieve alone.</div>
+  </section>
+
+  <section class="tab" id="t2">
+    <div class="sec-h"><div class="badge">2</div><h2>문장분석</h2><span class="en">Sentence Analysis &middot; 41 sentences</span></div>
+
+    <div class="subsec">Introduction</div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">1</span>If two heads are better than one, then what could hundreds of heads accomplish?</div>
+      <div class="slit">If <b>two heads are better than one</b>, / then what <b>could</b> hundreds of heads accomplish?<br>만약 두 머리가 하나보다 낫다면, / 그렇다면 수백 개의 머리는 무엇을 이뤄낼 수 있을까?</div>
+      <div class="strans">백지장도 맞들면 낫다는데, 그렇다면 수백 명이 머리를 맞대면 무엇을 이룰 수 있을까?</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">속담 비교급 (two heads are better than one)</span> <span class="gmark t">&#9654;</span><span class="g-ex">two heads are better than one</span> <span class="gmark s">&#9733;</span><span class="g-pt">'백지장도 맞들면 낫다', 협력의 가치를 나타내는 속담</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">의문사 what + 조동사 could (추측)</span> <span class="gmark t">&#9654;</span><span class="g-ex">what could hundreds of heads accomplish</span> <span class="gmark s">&#9733;</span><span class="g-pt">could로 가능성·추측, '무엇을 이룰 수 있을까'</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">2</span>This question was the origin of crowdsourcing.</div>
+      <div class="slit">This question was / <b>the origin of</b> crowdsourcing.<br>이 질문이 / 크라우드소싱의 기원이었다.</div>
+      <div class="strans">이 질문이 바로 크라우드소싱의 출발점이었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">2형식 be동사 + 보어 (A is B)</span> <span class="gmark t">&#9654;</span><span class="g-ex">This question was the origin</span> <span class="gmark s">&#9733;</span><span class="g-pt">주어=보어, '이 질문이 곧 기원'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">the origin of (~의 기원/유래)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the origin of crowdsourcing</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~의 근원', of + 명사</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">3</span>The word "crowdsourcing" comes from a combination of the words "crowd" and "outsourcing."</div>
+      <div class="slit">The word "crowdsourcing" / <b>comes from</b> <b>a combination of</b> the words / "crowd" and "outsourcing."<br>'크라우드소싱'이라는 단어는 / 단어들의 결합에서 나온다 / '크라우드(군중)'와 '아웃소싱(외주)'의.</div>
+      <div class="strans">'크라우드소싱'이라는 말은 '크라우드(군중)'와 '아웃소싱(외주)'이라는 두 단어가 합쳐져 생긴 것이다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">come from (~에서 유래하다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">comes from a combination</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~에서 비롯되다/나오다'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">a combination of A and B</span> <span class="gmark t">&#9654;</span><span class="g-ex">a combination of "crowd" and "outsourcing"</span> <span class="gmark s">&#9733;</span><span class="g-pt">'A와 B의 결합'</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">4</span>It is based on the belief that getting input from a large group of people can lead to a better solution.</div>
+      <div class="slit">It <b>is based on</b> the belief / <b>that</b> getting input from a large group of people / can <b>lead to</b> a better solution.<br>그것은 믿음에 기반한다 / 큰 집단의 사람들로부터 의견을 얻는 것이 / 더 나은 해결책으로 이어질 수 있다는.</div>
+      <div class="strans">이는 많은 사람에게서 의견을 모으면 더 나은 해결책에 이를 수 있다는 믿음에 바탕을 둔다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">동격의 that (the belief that ~)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the belief that getting input ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">belief의 내용을 that절로 설명(동격). 관계대명사 that과 구별</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">동명사 주어 (getting ... can lead)</span> <span class="gmark t">&#9654;</span><span class="g-ex">getting input ... can lead to</span> <span class="gmark s">&#9733;</span><span class="g-pt">동명사구 주어는 단수 취급, lead to(~로 이어지다)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">5</span>Although the term "crowdsourcing" was first coined by a magazine editor in 2005, people have used this method throughout history.</div>
+      <div class="slit"><b>Although</b> the term "crowdsourcing" was first <b>coined</b> by a magazine editor in 2005, / people <b>have used</b> this method / throughout history.<br>비록 '크라우드소싱'이라는 용어가 2005년 한 잡지 편집자에 의해 처음 만들어졌지만, / 사람들은 이 방법을 사용해 왔다 / 역사 내내.</div>
+      <div class="strans">'크라우드소싱'이라는 용어 자체는 2005년 한 잡지 편집자가 처음 만들었지만, 사람들은 역사 내내 이 방법을 써 왔다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">양보 접속사 although (비록 ~지만)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Although the term ... was first coined ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">주절(역사 내내 사용)과 대조</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">현재완료 (have p.p., 계속)</span> <span class="gmark t">&#9654;</span><span class="g-ex">people have used this method throughout history</span> <span class="gmark s">&#9733;</span><span class="g-pt">과거~현재 계속, throughout history와 호응</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">6</span>Let's find out how people have found better solutions to problems by crowdsourcing.</div>
+      <div class="slit"><b>Let's find out</b> / <b>how</b> people have found better solutions to problems / by crowdsourcing.<br>알아보자 / 사람들이 어떻게 문제에 대한 더 나은 해결책을 찾아왔는지를 / 크라우드소싱을 통해.</div>
+      <div class="strans">사람들이 크라우드소싱으로 어떻게 더 나은 해결책을 찾아왔는지 살펴보자.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">Let's + 동사원형 (~하자) / find out</span> <span class="gmark t">&#9654;</span><span class="g-ex">Let's find out</span> <span class="gmark s">&#9733;</span><span class="g-pt">제안 표현, find out(알아내다)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">간접의문문 (how + 주어 + 동사)</span> <span class="gmark t">&#9654;</span><span class="g-ex">how people have found better solutions</span> <span class="gmark s">&#9733;</span><span class="g-pt">find out의 목적어, 평서문 어순</span></div>
+      </div>
+    </div>
+
+    <div class="subsec">Case 1 &middot; 자유의 여신상</div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">7</span>The Statue of Liberty is one of the world's most symbolic monuments.</div>
+      <div class="slit">The Statue of Liberty is / <b>one of the world's most symbolic monuments</b>.<br>자유의 여신상은 / 세계에서 가장 상징적인 기념물 중 하나이다.</div>
+      <div class="strans">자유의 여신상은 세계에서 가장 상징적인 기념물 중 하나다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">one of the + 최상급 + 복수명사</span> <span class="gmark t">&#9654;</span><span class="g-ex">one of the world's most symbolic monuments</span> <span class="gmark s">&#9733;</span><span class="g-pt">'가장 ~한 것들 중 하나', 뒤에 복수명사(monuments)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">최상급 + 소유격 ('s)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the world's most symbolic</span> <span class="gmark s">&#9733;</span><span class="g-pt">'세계에서 가장 ~한', 소유격으로 범위 표시</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">8</span>However, without the efforts of many ordinary people, this gorgeous statue would have never become one of America's most famous landmarks.</div>
+      <div class="slit">However, <b>without</b> the efforts of many ordinary people, / this gorgeous statue <b>would have never become</b> / one of America's most famous landmarks.<br>그러나, 많은 평범한 사람들의 노력이 없었다면, / 이 멋진 동상은 결코 되지 못했을 것이다 / 미국의 가장 유명한 명소 중 하나가.</div>
+      <div class="strans">그러나 수많은 평범한 사람들의 노력이 없었다면, 이 웅장한 동상은 결코 미국의 대표 명소가 되지 못했을 것이다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">without + 명사 (가정법, ~이 없었다면)</span> <span class="gmark t">&#9654;</span><span class="g-ex">without the efforts ..., this statue would have never become</span> <span class="gmark s">&#9733;</span><span class="g-pt">without이 if절 대신(= If it had not been for), 가정법 과거완료</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">가정법 과거완료 (would have p.p.)</span> <span class="gmark t">&#9654;</span><span class="g-ex">would have never become</span> <span class="gmark s">&#9733;</span><span class="g-pt">과거 사실의 반대, '되지 못했을 것이다'</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">9</span>The magnificent Statue of Liberty was designed by a French sculptor and given as a gift from the French government to the US in the late 1800s.</div>
+      <div class="slit">The magnificent Statue of Liberty / <b>was designed</b> by a French sculptor / and (was) <b>given as a gift</b> / from the French government to the US / in the late 1800s.<br>그 웅장한 자유의 여신상은 / 한 프랑스 조각가에 의해 디자인되었다 / 그리고 선물로 주어졌다 / 프랑스 정부로부터 미국에 / 1800년대 후반에.</div>
+      <div class="strans">웅장한 자유의 여신상은 한 프랑스 조각가가 디자인했고, 1800년대 후반 프랑스 정부가 미국에 선물로 주었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">수동태 병렬 (was designed ... and (was) given)</span> <span class="gmark t">&#9654;</span><span class="g-ex">was designed by ... and given as a gift</span> <span class="gmark s">&#9733;</span><span class="g-pt">두 번째 was 생략, 과거분사(designed, given) 병렬</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">as a gift (~로서, 자격/역할)</span> <span class="gmark t">&#9654;</span><span class="g-ex">given as a gift</span> <span class="gmark s">&#9733;</span><span class="g-pt">전치사 as '~로서'</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">10</span>The statue was sent to New York in pieces, awaiting assembly.</div>
+      <div class="slit">The statue was sent to New York / <b>in pieces</b>, / <b>awaiting</b> assembly.<br>그 동상은 뉴욕으로 보내졌다 / 조각난 채로, / 조립을 기다리며.</div>
+      <div class="strans">그 동상은 조각난 상태로 뉴욕에 보내져 조립을 기다리고 있었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">in pieces (산산조각 난, 분해된 상태로)</span> <span class="gmark t">&#9654;</span><span class="g-ex">sent to New York in pieces</span> <span class="gmark s">&#9733;</span><span class="g-pt">'조각으로 나뉘어', 상태를 표현</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">분사구문 (현재분사 awaiting)</span> <span class="gmark t">&#9654;</span><span class="g-ex">..., awaiting assembly</span> <span class="gmark s">&#9733;</span><span class="g-pt">동시상황, '~을 기다리면서'(능동)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">11</span>Unfortunately, the US government could not afford to fund a base for the statue, so the pieces lay in storage boxes for several months.</div>
+      <div class="slit">Unfortunately, the US government <b>could not afford to fund</b> a base for the statue, / <b>so</b> the pieces <b>lay</b> in storage boxes / for several months.<br>불행히도, 미국 정부는 동상의 받침대에 자금을 댈 여유가 없었다, / 그래서 그 조각들은 보관 상자 안에 놓여 있었다 / 여러 달 동안.</div>
+      <div class="strans">안타깝게도 미국 정부는 받침대를 세울 자금을 댈 여유가 없었고, 그래서 동상 조각들은 여러 달 동안 보관 상자 속에 방치되었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">can(could) afford to + V (~할 여유가 있다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">could not afford to fund</span> <span class="gmark s">&#9733;</span><span class="g-pt">주로 부정문으로 '~할 (금전적) 여유가 없다'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">결과의 so / 자동사 lie-lay-lain</span> <span class="gmark t">&#9654;</span><span class="g-ex">so the pieces lay in storage boxes</span> <span class="gmark s">&#9733;</span><span class="g-pt">lay는 lie(놓여 있다)의 과거. lay-laid(~을 놓다, 타동사)와 구별</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">12</span>Then an influential newspaper editor named Joseph Pulitzer had a brilliant idea.</div>
+      <div class="slit">Then an <b>influential</b> newspaper editor / <b>named</b> Joseph Pulitzer / had a brilliant idea.<br>그때 영향력 있는 신문 편집자가 / 조지프 퓰리처라는 이름의 / 기발한 아이디어를 떠올렸다.</div>
+      <div class="strans">그때 조지프 퓰리처라는 영향력 있는 신문 편집자가 기발한 아이디어를 떠올렸다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거분사 후치수식 (named)</span> <span class="gmark t">&#9654;</span><span class="g-ex">an editor named Joseph Pulitzer</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~라는 이름의', editor 수식(= called)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">형용사 influential (영향력 있는)</span> <span class="gmark t">&#9654;</span><span class="g-ex">an influential newspaper editor</span> <span class="gmark s">&#9733;</span><span class="g-pt">influence(영향)의 형용사형</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">13</span>Using his newspaper, he promoted a fundraising campaign targeted at the general public.</div>
+      <div class="slit"><b>Using</b> his newspaper, / he promoted a fundraising campaign / <b>targeted at</b> the general public.<br>자신의 신문을 이용하여, / 그는 모금 캠페인을 홍보했다 / 일반 대중을 겨냥한.</div>
+      <div class="strans">그는 자신의 신문을 이용해 일반 대중을 겨냥한 모금 캠페인을 펼쳤다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">분사구문 (현재분사 Using, 수단)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Using his newspaper, he promoted</span> <span class="gmark s">&#9733;</span><span class="g-pt">주절과 능동, '~을 이용하여'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거분사 후치수식 (targeted at)</span> <span class="gmark t">&#9654;</span><span class="g-ex">a campaign targeted at the general public</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~을 겨냥한', campaign 수식(수동)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">14</span>In just five months, the campaign raised over $100,000 from more than 120,000 donors around the country.</div>
+      <div class="slit">In just five months, / the campaign <b>raised over</b> $100,000 / from <b>more than</b> 120,000 donors / around the country.<br>단 5개월 만에, / 그 캠페인은 10만 달러가 넘는 돈을 모았다 / 12만 명이 넘는 기부자로부터 / 전국에서.</div>
+      <div class="strans">단 5개월 만에 그 캠페인은 전국 12만 명이 넘는 기부자로부터 10만 달러 넘는 돈을 모았다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">over / more than + 수 (~이 넘는)</span> <span class="gmark t">&#9654;</span><span class="g-ex">over $100,000 ... more than 120,000 donors</span> <span class="gmark s">&#9733;</span><span class="g-pt">수량 강조, '~을 초과하는'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">raise (모으다/일으키다, 타동사)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the campaign raised over $100,000</span> <span class="gmark s">&#9733;</span><span class="g-pt">raise-raised(타동사). rise-rose(오르다, 자동사)와 구별</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">15</span>Most of the donations were less than one dollar.</div>
+      <div class="slit"><b>Most of the</b> donations were / <b>less than</b> one dollar.<br>기부금의 대부분은 / 1달러 미만이었다.</div>
+      <div class="strans">기부금은 대부분 1달러도 안 되는 소액이었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">most of the + 복수명사 + 복수동사</span> <span class="gmark t">&#9654;</span><span class="g-ex">Most of the donations were</span> <span class="gmark s">&#9733;</span><span class="g-pt">most of the donations(복수)에 were 일치</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">less than (~보다 적은/미만의)</span> <span class="gmark t">&#9654;</span><span class="g-ex">less than one dollar</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~미만', more than과 대조</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">16</span>However, all together, the money was enough to cover the cost of building the base for the statue.</div>
+      <div class="slit">However, <b>all together</b>, / the money was <b>enough to cover</b> / <b>the cost of building</b> the base / for the statue.<br>그러나, 모두 합치니, / 그 돈은 충분했다 / 받침대를 짓는 비용을 충당하기에 / 동상을 위한.</div>
+      <div class="strans">그러나 그 돈을 모두 합치자 동상의 받침대를 짓는 비용을 충당하기에 충분했다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">형용사 + enough + to부정사 (~하기에 충분한)</span> <span class="gmark t">&#9654;</span><span class="g-ex">enough to cover the cost</span> <span class="gmark s">&#9733;</span><span class="g-pt">enough가 형용사 뒤에 위치, '~할 만큼 충분히'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">the cost of + 동명사 (~하는 비용)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the cost of building the base</span> <span class="gmark s">&#9733;</span><span class="g-pt">of + 동명사, '~하는 데 드는 비용'</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">17</span>There was even enough money left over to give the sculptor a gift!</div>
+      <div class="slit"><b>There was</b> even enough money / <b>left over</b> / <b>to give</b> the sculptor a gift!<br>심지어 충분한 돈이 남아 있었다 / 그 조각가에게 선물을 줄 만큼!</div>
+      <div class="strans">심지어 조각가에게 선물을 줄 만큼의 돈까지 남았다!</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">There + be + 명사 (~이 있었다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">There was even enough money</span> <span class="gmark s">&#9733;</span><span class="g-pt">유도부사 there, be동사는 뒤 명사(money)에 일치</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거분사 left over + to부정사(4형식)</span> <span class="gmark t">&#9654;</span><span class="g-ex">money left over to give the sculptor a gift</span> <span class="gmark s">&#9733;</span><span class="g-pt">left over(남겨진, money 수식), give + 간접목적어 + 직접목적어</span></div>
+      </div>
+    </div>
+
+    <div class="subsec">Case 2 &middot; 위키피디아</div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">18</span>Wikipedia, a giant online encyclopedia, was actually born from an earlier project known as Nupedia.</div>
+      <div class="slit">Wikipedia, <b>a giant online encyclopedia</b>, / was actually <b>born from</b> an earlier project / <b>known as</b> Nupedia.<br>위키피디아는, 거대한 온라인 백과사전인데, / 사실 더 이른 프로젝트에서 태어났다 / 누피디아로 알려진.</div>
+      <div class="strans">거대한 온라인 백과사전인 위키피디아는 사실 누피디아라는 더 앞선 프로젝트에서 비롯되었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">동격 콤마 (명사, 명사)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Wikipedia, a giant online encyclopedia, was</span> <span class="gmark s">&#9733;</span><span class="g-pt">콤마로 묶인 동격, 둘 다 같은 대상</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">be born from / 과거분사 (known as)</span> <span class="gmark t">&#9654;</span><span class="g-ex">born from an earlier project known as Nupedia</span> <span class="gmark s">&#9733;</span><span class="g-pt">be born from(~에서 생겨나다), known as(~로 알려진, project 수식)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">19</span>The plan was to publish an online encyclopedia written by experts.</div>
+      <div class="slit">The plan <b>was to publish</b> an online encyclopedia / <b>written by</b> experts.<br>그 계획은 ~이었다 / 온라인 백과사전을 출판하는 것 / 전문가들에 의해 쓰인.</div>
+      <div class="strans">그 계획은 전문가들이 집필한 온라인 백과사전을 출판하는 것이었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">to부정사 보어 (be + to부정사)</span> <span class="gmark t">&#9654;</span><span class="g-ex">The plan was to publish</span> <span class="gmark s">&#9733;</span><span class="g-pt">주격보어, '~하는 것이다'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거분사 후치수식 (written by)</span> <span class="gmark t">&#9654;</span><span class="g-ex">an encyclopedia written by experts</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~에 의해 쓰인', encyclopedia 수식(수동)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">20</span>However, there was a major problem: The content was being written extremely slowly, with only 21 articles written during the first year.</div>
+      <div class="slit">However, there was a major problem: / The content <b>was being written</b> extremely slowly, / <b>with</b> only 21 articles <b>written</b> / during the first year.<br>그러나, 중대한 문제가 있었다: / 내용이 극도로 느리게 쓰이고 있었다, / 단 21개의 기사만 쓰인 채로 / 첫해 동안.</div>
+      <div class="strans">그러나 큰 문제가 있었다. 내용이 너무 느리게 작성되어, 첫해 동안 단 21개의 글만 쓰였다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거진행 수동태 (was being + p.p.)</span> <span class="gmark t">&#9654;</span><span class="g-ex">The content was being written</span> <span class="gmark s">&#9733;</span><span class="g-pt">'쓰이고 있었다', 진행 + 수동</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">with + 목적어 + 과거분사 (부대상황)</span> <span class="gmark t">&#9654;</span><span class="g-ex">with only 21 articles written</span> <span class="gmark s">&#9733;</span><span class="g-pt">'with+O+p.p.'(O가 ~된 채로), articles는 수동이라 written</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">21</span>To accelerate the process of writing content, the plan was changed.</div>
+      <div class="slit"><b>To accelerate</b> the process of writing content, / the plan <b>was changed</b>.<br>내용 작성 과정을 가속화하기 위해, / 그 계획은 변경되었다.</div>
+      <div class="strans">콘텐츠 작성 속도를 높이기 위해 계획이 변경되었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">목적의 to부정사 (~하기 위해)</span> <span class="gmark t">&#9654;</span><span class="g-ex">To accelerate the process</span> <span class="gmark s">&#9733;</span><span class="g-pt">문두 부사적 용법, '~하기 위해'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">수동태 (was changed)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the plan was changed</span> <span class="gmark s">&#9733;</span><span class="g-pt">'변경되었다', 행위자 생략</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">22</span>In the new project, called Wikipedia, permission to write or edit articles was given to anyone with Internet access, not just to the experts alone.</div>
+      <div class="slit">In the new project, called Wikipedia, / <b>permission to write or edit</b> articles / <b>was given to</b> anyone with Internet access, / <b>not just</b> to the experts <b>alone</b>.<br>위키피디아라 불리는 새 프로젝트에서, / 기사를 쓰거나 편집할 권한이 / 인터넷 접속이 가능한 누구에게나 주어졌다, / 전문가들에게만이 아니라.</div>
+      <div class="strans">위키피디아라는 새 프로젝트에서는 글을 쓰거나 편집할 권한이 전문가만이 아니라 인터넷을 쓸 수 있는 누구에게나 주어졌다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">to부정사 형용사적 용법 (permission to V)</span> <span class="gmark t">&#9654;</span><span class="g-ex">permission to write or edit articles</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~할 권한', permission 수식</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">4형식의 수동태 (was given to ~)</span> <span class="gmark t">&#9654;</span><span class="g-ex">permission was given to anyone</span> <span class="gmark s">&#9733;</span><span class="g-pt">give A to B의 수동, anyone with(~가 있는 누구나)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">23</span>The scale of collaboration was impressive.</div>
+      <div class="slit"><b>The scale of</b> collaboration / was impressive.<br>협업의 규모는 / 인상적이었다.</div>
+      <div class="strans">협업의 규모는 놀라웠다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">the scale of (~의 규모)</span> <span class="gmark t">&#9654;</span><span class="g-ex">The scale of collaboration</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~의 규모/범위'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">2형식 be + 형용사 보어</span> <span class="gmark t">&#9654;</span><span class="g-ex">was impressive</span> <span class="gmark s">&#9733;</span><span class="g-pt">주어의 상태 설명, '인상적이었다'</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">24</span>By the end of the first year, Wikipedia contained more than 20,000 articles in 18 languages.</div>
+      <div class="slit"><b>By</b> the end of the first year, / Wikipedia <b>contained</b> more than 20,000 articles / in 18 languages.<br>첫해 말까지, / 위키피디아는 2만 개가 넘는 기사를 담고 있었다 / 18개 언어로.</div>
+      <div class="strans">첫해 말이 되자 위키피디아는 18개 언어로 된 2만 개가 넘는 글을 담게 되었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">by + 시점 (~까지, 완료 시한)</span> <span class="gmark t">&#9654;</span><span class="g-ex">By the end of the first year</span> <span class="gmark s">&#9733;</span><span class="g-pt">by(~까지는, 완료) vs until(~까지 계속)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">contain (담다/포함하다, 상태동사)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Wikipedia contained more than 20,000 articles</span> <span class="gmark s">&#9733;</span><span class="g-pt">contain은 상태동사라 보통 진행형으로 쓰지 않음</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">25</span>Since then, the site has grown rapidly, swelling to more than 40 million articles written in more than 250 languages.</div>
+      <div class="slit"><b>Since then</b>, the site <b>has grown</b> rapidly, / <b>swelling to</b> more than 40 million articles / <b>written</b> in more than 250 languages.<br>그 이후로, / 그 사이트는 빠르게 성장해 왔다, / 4천만 개가 넘는 기사로 불어나면서 / 250개가 넘는 언어로 쓰인.</div>
+      <div class="strans">그 이후 그 사이트는 빠르게 성장하여, 250개가 넘는 언어로 작성된 4천만 개 이상의 글로 불어났다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">Since then + 현재완료 (그 이후 ~해 왔다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Since then, the site has grown</span> <span class="gmark s">&#9733;</span><span class="g-pt">since(이후)와 현재완료(have p.p.)의 호응</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">분사구문 (swelling) + 과거분사 (written)</span> <span class="gmark t">&#9654;</span><span class="g-ex">swelling to ... articles written in ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">swelling(능동 분사구문), written(articles 수식, 수동)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">26</span>Every month, Wikipedia receives over 18 billion hits, making it one of the most popular sites on the Internet.</div>
+      <div class="slit">Every month, Wikipedia receives over 18 billion hits, / <b>making it</b> one of the most popular sites / on the Internet.<br>매달, / 위키피디아는 180억 회가 넘는 조회수를 받는다, / 그것을 가장 인기 있는 사이트 중 하나로 만들면서 / 인터넷에서.</div>
+      <div class="strans">위키피디아는 매달 180억 회가 넘는 방문을 받으며, 이는 위키피디아를 인터넷에서 가장 인기 있는 사이트 중 하나로 만든다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">분사구문 (making, 결과)</span> <span class="gmark t">&#9654;</span><span class="g-ex">..., making it one of the most popular sites</span> <span class="gmark s">&#9733;</span><span class="g-pt">앞 절의 결과, '그 결과 ~하게 만든다'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">make + 목적어 + 목적격보어 (5형식)</span> <span class="gmark t">&#9654;</span><span class="g-ex">making it one of the most popular sites</span> <span class="gmark s">&#9733;</span><span class="g-pt">make+O+명사보어, 'O를 ~로 만들다'</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">27</span>Wikipedia enables people from around the world to build a free, shared knowledge base.</div>
+      <div class="slit">Wikipedia <b>enables</b> people from around the world / <b>to build</b> a free, shared knowledge base.<br>위키피디아는 전 세계 사람들이 ~하게 한다 / 무료의, 공유된 지식 기반을 구축하도록.</div>
+      <div class="strans">위키피디아는 전 세계 사람들이 무료로 공유되는 지식 기반을 구축할 수 있게 해 준다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">enable + 목적어 + to부정사 (~가 …하게 하다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">enables people ... to build</span> <span class="gmark s">&#9733;</span><span class="g-pt">'O가 ~할 수 있게 하다', to부정사 목적격보어</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">from around the world (전 세계로부터의)</span> <span class="gmark t">&#9654;</span><span class="g-ex">people from around the world</span> <span class="gmark s">&#9733;</span><span class="g-pt">전치사 중복(from + around), people 수식</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">28</span>Its volunteer writers and editors, who are united by the joy of sharing their knowledge, have compiled a huge amount of information in a single location and made it available to everyone.</div>
+      <div class="slit">Its volunteer writers and editors, / <b>who are united by</b> the joy of sharing their knowledge, / <b>have compiled</b> a huge amount of information in a single location / and <b>made it available</b> to everyone.<br>그것의 자원봉사 작성자와 편집자들은, / 자기 지식을 나누는 기쁨으로 하나가 된, / 막대한 양의 정보를 한 장소에 모았다 / 그리고 그것을 모두에게 이용 가능하게 만들었다.</div>
+      <div class="strans">지식을 나누는 기쁨으로 하나가 된 위키피디아의 자원봉사 작성자와 편집자들은, 막대한 정보를 한곳에 모아 누구나 이용할 수 있게 만들었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">계속적 용법 관계대명사 who (콤마+who)</span> <span class="gmark t">&#9654;</span><span class="g-ex">editors, who are united by ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">선행사 보충 설명, 수동(be united by)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">현재완료 병렬 + 5형식 (made it available)</span> <span class="gmark t">&#9654;</span><span class="g-ex">have compiled ... and made it available</span> <span class="gmark s">&#9733;</span><span class="g-pt">have compiled와 (have) made 병렬, make+O+형용사(available)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">29</span>Thanks to them, we see how much we can achieve and learn when we work together.</div>
+      <div class="slit"><b>Thanks to</b> them, / we see / <b>how much</b> we can achieve and learn / when we work together.<br>그들 덕분에, / 우리는 알게 된다 / 우리가 얼마나 많이 이루고 배울 수 있는지를 / 우리가 함께 일할 때.</div>
+      <div class="strans">그들 덕분에 우리는 함께 협력할 때 얼마나 많은 것을 이루고 배울 수 있는지 알게 된다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">thanks to (~덕분에)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Thanks to them</span> <span class="gmark s">&#9733;</span><span class="g-pt">긍정적 원인, '~덕분에' + 명사(구)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">간접의문문 (how much + 주어 + 동사)</span> <span class="gmark t">&#9654;</span><span class="g-ex">how much we can achieve and learn</span> <span class="gmark s">&#9733;</span><span class="g-pt">see의 목적어, 평서문 어순</span></div>
+      </div>
+    </div>
+
+    <div class="subsec">Case 3 &middot; 시민 과학</div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">30</span>Another form of crowdsourcing is citizen science, which is the practice of public participation and collaboration in scientific research.</div>
+      <div class="slit"><b>Another</b> form of crowdsourcing is citizen science, / <b>which</b> is the practice of public participation and collaboration / in scientific research.<br>크라우드소싱의 또 다른 형태는 시민 과학이다, / 그것은 대중 참여와 협력의 실천이다 / 과학 연구에서의.</div>
+      <div class="strans">크라우드소싱의 또 다른 형태는 시민 과학으로, 이는 과학 연구에 대중이 참여하고 협력하는 활동이다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">Another + 단수명사 (또 다른 하나)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Another form of crowdsourcing</span> <span class="gmark s">&#9733;</span><span class="g-pt">'또 하나의', 단수 취급</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">계속적 용법 which (콤마+which)</span> <span class="gmark t">&#9654;</span><span class="g-ex">citizen science, which is the practice ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">앞 명사(citizen science) 보충 설명</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">31</span>Through citizen science, people collect data and share knowledge for research projects.</div>
+      <div class="slit"><b>Through</b> citizen science, / people <b>collect</b> data <b>and share</b> knowledge / for research projects.<br>시민 과학을 통해, / 사람들은 자료를 수집하고 지식을 공유한다 / 연구 프로젝트를 위해.</div>
+      <div class="strans">시민 과학을 통해 사람들은 연구 프로젝트를 위해 자료를 모으고 지식을 공유한다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">through + 명사 (~을 통해, 수단)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Through citizen science</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~을 통하여', 매개·수단</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">동사 병렬 (collect ... and share)</span> <span class="gmark t">&#9654;</span><span class="g-ex">collect data and share knowledge</span> <span class="gmark s">&#9733;</span><span class="g-pt">두 동사가 and로 대등하게 연결</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">32</span>A great example of citizen science is Project BudBurst in the US.</div>
+      <div class="slit"><b>A great example of</b> citizen science / is Project BudBurst in the US.<br>시민 과학의 훌륭한 예는 / 미국의 '프로젝트 버드버스트'이다.</div>
+      <div class="strans">시민 과학의 좋은 예는 미국의 '프로젝트 버드버스트'다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">an example of (~의 예)</span> <span class="gmark t">&#9654;</span><span class="g-ex">A great example of citizen science</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~의 (한) 예', of + 명사</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">2형식 be + 명사 보어</span> <span class="gmark t">&#9654;</span><span class="g-ex">example ... is Project BudBurst</span> <span class="gmark s">&#9733;</span><span class="g-pt">주어=보어(고유명사)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">33</span>Ordinary participants in all parts of the country observe and record data about the first appearance of leaves, flowers, and fruits from various plant species in their local areas.</div>
+      <div class="slit">Ordinary participants in all parts of the country / <b>observe and record</b> data / about <b>the first appearance of</b> leaves, flowers, and fruits / from various plant species / in their local areas.<br>전국 각지의 평범한 참가자들은 / 자료를 관찰하고 기록한다 / 잎, 꽃, 열매가 처음 나타나는 것에 관한 / 다양한 식물 종으로부터의 / 자기 지역에서.</div>
+      <div class="strans">전국 각지의 평범한 참가자들은 자기 지역에서 다양한 식물 종의 잎, 꽃, 열매가 처음 나타나는 시기에 관한 자료를 관찰하고 기록한다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">동사 병렬 (observe and record)</span> <span class="gmark t">&#9654;</span><span class="g-ex">observe and record data</span> <span class="gmark s">&#9733;</span><span class="g-pt">복수주어 participants에 현재시제 동사원형 형태</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">the first appearance of (~의 첫 출현)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the first appearance of leaves, flowers, and fruits</span> <span class="gmark s">&#9733;</span><span class="g-pt">A, B, and C 병렬 목적어</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">34</span>Then they send their data to a national database.</div>
+      <div class="slit">Then they <b>send</b> their data <b>to</b> a national database.<br>그런 다음 그들은 자기 자료를 보낸다 / 국가 데이터베이스로.</div>
+      <div class="strans">그런 다음 참가자들은 그 자료를 국가 데이터베이스로 보낸다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">send A to B (A를 B로 보내다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">send their data to a national database</span> <span class="gmark s">&#9733;</span><span class="g-pt">3형식, send + 목적어 + to + 장소</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">연결부사 then (그런 다음)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Then they send</span> <span class="gmark s">&#9733;</span><span class="g-pt">시간 순서, '그러고 나서'</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">35</span>Scientists use the accumulated data to learn about how individual plant species respond to climate changes locally, regionally, and nationally.</div>
+      <div class="slit">Scientists use <b>the accumulated</b> data / <b>to learn about</b> / <b>how</b> individual plant species <b>respond to</b> climate changes / locally, regionally, and nationally.<br>과학자들은 축적된 자료를 사용한다 / 알기 위해 / 개별 식물 종이 기후 변화에 어떻게 반응하는지를 / 지역적으로, 권역적으로, 전국적으로.</div>
+      <div class="strans">과학자들은 축적된 자료를 이용해 개별 식물 종이 지역·권역·전국 단위에서 기후 변화에 어떻게 반응하는지 파악한다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거분사 후치수식 (accumulated)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the accumulated data</span> <span class="gmark s">&#9733;</span><span class="g-pt">'축적된', data 수식(수동)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">간접의문문 (how + 주어 + 동사) + respond to</span> <span class="gmark t">&#9654;</span><span class="g-ex">how ... species respond to climate changes</span> <span class="gmark s">&#9733;</span><span class="g-pt">learn about의 목적어, respond to(~에 반응하다)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">36</span>They will also use it to detect the possible long-term impacts of climate change by comparing the findings with historical data.</div>
+      <div class="slit">They will also use it / <b>to detect</b> the possible long-term impacts of climate change / <b>by comparing</b> the findings <b>with</b> historical data.<br>그들은 또한 그것을 사용할 것이다 / 기후 변화의 가능한 장기적 영향을 탐지하기 위해 / 그 결과를 과거 자료와 비교함으로써.</div>
+      <div class="strans">또한 과학자들은 그 결과를 과거 자료와 비교함으로써 기후 변화의 잠재적인 장기 영향을 감지하는 데 그 자료를 활용할 것이다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">목적의 to부정사 (to detect)</span> <span class="gmark t">&#9654;</span><span class="g-ex">use it to detect the impacts</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~을 탐지하기 위해'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">by + 동명사 (수단) / compare A with B</span> <span class="gmark t">&#9654;</span><span class="g-ex">by comparing the findings with historical data</span> <span class="gmark s">&#9733;</span><span class="g-pt">by -ing(~함으로써), compare A with B(A를 B와 비교하다)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">37</span>Each sample of data, sent in voluntarily by tens of thousands of contributors, is hugely valuable.</div>
+      <div class="slit"><b>Each sample</b> of data, / <b>sent in</b> voluntarily by tens of thousands of contributors, / <b>is</b> hugely valuable.<br>각각의 자료 표본은, / 수만 명의 기여자에 의해 자발적으로 제출된, / 엄청나게 가치 있다.</div>
+      <div class="strans">수만 명의 기여자가 자발적으로 보낸 각각의 자료 표본은 엄청나게 소중하다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">each + 단수명사 + 단수동사</span> <span class="gmark t">&#9654;</span><span class="g-ex">Each sample ... is hugely valuable</span> <span class="gmark s">&#9733;</span><span class="g-pt">each는 단수 취급(is), 삽입구의 복수명사에 현혹 주의</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거분사구 삽입 (sent in ... by)</span> <span class="gmark t">&#9654;</span><span class="g-ex">sample, sent in voluntarily by ..., is</span> <span class="gmark s">&#9733;</span><span class="g-pt">콤마로 삽입된 분사구(주어 수식, 수동), send in(제출하다)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">38</span>In fact, a research project of this grand scale would be impossible without crowdsourcing.</div>
+      <div class="slit">In fact, a research project <b>of this grand scale</b> / <b>would be</b> impossible / <b>without</b> crowdsourcing.<br>사실, / 이렇게 거대한 규모의 연구 프로젝트는 / 불가능할 것이다 / 크라우드소싱 없이는.</div>
+      <div class="strans">사실 이렇게 거대한 규모의 연구는 크라우드소싱 없이는 불가능할 것이다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">without + 명사 (가정법, ~이 없다면)</span> <span class="gmark t">&#9654;</span><span class="g-ex">would be impossible without crowdsourcing</span> <span class="gmark s">&#9733;</span><span class="g-pt">without이 if절 대신, 가정법 과거(would be)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">of + 명사 (성질·규모)</span> <span class="gmark t">&#9654;</span><span class="g-ex">a project of this grand scale</span> <span class="gmark s">&#9733;</span><span class="g-pt">'of+명사'가 형용사처럼 project 수식</span></div>
+      </div>
+    </div>
+
+    <div class="subsec">Conclusion</div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">39</span>Nowadays, crowdsourcing is being enhanced by technologies such as social media networks and even specially designed crowdsourcing platforms.</div>
+      <div class="slit">Nowadays, crowdsourcing <b>is being enhanced</b> / by technologies <b>such as</b> social media networks / and even <b>specially designed</b> crowdsourcing platforms.<br>요즘, / 크라우드소싱은 강화되고 있다 / 소셜 미디어 네트워크 같은 기술에 의해 / 그리고 심지어 특별히 설계된 크라우드소싱 플랫폼에 의해.</div>
+      <div class="strans">오늘날 크라우드소싱은 소셜 미디어 네트워크와 심지어 특별히 설계된 크라우드소싱 플랫폼 같은 기술로 더욱 강화되고 있다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">현재진행 수동태 (is being + p.p.)</span> <span class="gmark t">&#9654;</span><span class="g-ex">crowdsourcing is being enhanced</span> <span class="gmark s">&#9733;</span><span class="g-pt">'강화되고 있다', 진행 + 수동</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거분사 후치수식 (specially designed)</span> <span class="gmark t">&#9654;</span><span class="g-ex">specially designed crowdsourcing platforms</span> <span class="gmark s">&#9733;</span><span class="g-pt">'특별히 설계된', platforms 수식</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">40</span>Such networks and platforms make it easier than ever before to take advantage of the combined power of the masses.</div>
+      <div class="slit">Such networks and platforms <b>make it easier</b> <b>than ever before</b> / <b>to take advantage of</b> the combined power of the masses.<br>그러한 네트워크와 플랫폼은 / 그 어느 때보다 더 쉽게 만든다 / 대중의 결합된 힘을 활용하는 것을.</div>
+      <div class="strans">그러한 네트워크와 플랫폼은 대중의 결합된 힘을 활용하는 일을 그 어느 때보다 쉽게 만든다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">가목적어 it / 진목적어 to부정사</span> <span class="gmark t">&#9654;</span><span class="g-ex">make it easier ... to take advantage</span> <span class="gmark s">&#9733;</span><span class="g-pt">make+it(가목적어)+형용사+to부정사(진목적어)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">take advantage of / 비교급 + than ever before</span> <span class="gmark t">&#9654;</span><span class="g-ex">take advantage of ... easier than ever before</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~을 이용하다', '그 어느 때보다 더 ~한'</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">41</span>This collective power helps us achieve a lot more than one of us could possibly achieve alone.</div>
+      <div class="slit">This collective power <b>helps us achieve</b> <b>a lot more</b> / <b>than</b> one of us could possibly achieve <b>alone</b>.<br>이 집단적인 힘은 / 우리가 훨씬 더 많이 이루도록 돕는다 / 우리 중 한 명이 혼자서 이룰 수 있는 것보다.</div>
+      <div class="strans">이 집단의 힘은 우리 중 한 사람이 혼자 이룰 수 있는 것보다 훨씬 더 많은 것을 이루도록 우리를 돕는다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">help + 목적어 + (to) 동사원형</span> <span class="gmark t">&#9654;</span><span class="g-ex">helps us achieve</span> <span class="gmark s">&#9733;</span><span class="g-pt">help는 to부정사/원형부정사 모두 가능, 여기선 원형(achieve)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">비교급 강조 (a lot more than)</span> <span class="gmark t">&#9654;</span><span class="g-ex">a lot more than one of us could ... achieve</span> <span class="gmark s">&#9733;</span><span class="g-pt">a lot이 비교급 more 강조('훨씬'), than 이하가 비교 대상</span></div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="tab" id="t3">
+    <div class="sec-h"><div class="badge">3</div><h2>핵심단어 및 표현</h2><span class="en">Key Words &amp; Expressions</span></div>
+
+    <div class="exp-h">핵심 단어</div>
+
+    <div class="voc"><span class="w">accomplish</span><span class="pos">v.</span><span class="mean">이루다, 성취하다</span><span class="deriv">accomplishment (n. 성취)</span></div>
+    <div class="voc"><span class="w">origin</span><span class="pos">n.</span><span class="mean">기원, 유래</span><span class="deriv">original (adj.), originate (v.)</span></div>
+    <div class="voc"><span class="w">combination</span><span class="pos">n.</span><span class="mean">결합, 조합</span><span class="deriv">combine (v. 결합하다)</span></div>
+    <div class="voc"><span class="w">input</span><span class="pos">n.</span><span class="mean">의견, 조언; 투입</span><span class="deriv">&mdash;</span></div>
+    <div class="voc"><span class="w">solution</span><span class="pos">n.</span><span class="mean">해결책</span><span class="deriv">solve (v. 해결하다)</span></div>
+    <div class="voc"><span class="w">coin</span><span class="pos">v.</span><span class="mean">(신조어를) 만들어 내다</span><span class="deriv">coinage (n. 신조어), coin (n. 동전)</span></div>
+    <div class="voc"><span class="w">symbolic</span><span class="pos">adj.</span><span class="mean">상징적인</span><span class="deriv">symbol (n.), symbolize (v.)</span></div>
+    <div class="voc"><span class="w">monument</span><span class="pos">n.</span><span class="mean">기념물, 기념비</span><span class="deriv">monumental (adj. 기념비적인)</span></div>
+    <div class="voc"><span class="w">ordinary</span><span class="pos">adj.</span><span class="mean">평범한, 보통의</span><span class="deriv">ordinarily (adv.)</span></div>
+    <div class="voc"><span class="w">gorgeous</span><span class="pos">adj.</span><span class="mean">멋진, 화려한</span><span class="deriv">&mdash;</span></div>
+    <div class="voc"><span class="w">landmark</span><span class="pos">n.</span><span class="mean">명소, 랜드마크</span><span class="deriv">&mdash;</span></div>
+    <div class="voc"><span class="w">magnificent</span><span class="pos">adj.</span><span class="mean">웅장한, 장엄한</span><span class="deriv">magnificence (n. 장엄함)</span></div>
+    <div class="voc"><span class="w">sculptor</span><span class="pos">n.</span><span class="mean">조각가</span><span class="deriv">sculpt (v.), sculpture (n. 조각품)</span></div>
+    <div class="voc"><span class="w">assembly</span><span class="pos">n.</span><span class="mean">조립; 집회</span><span class="deriv">assemble (v. 조립하다)</span></div>
+    <div class="voc"><span class="w">afford</span><span class="pos">v.</span><span class="mean">~할 (금전적) 여유가 있다</span><span class="deriv">affordable (adj. 감당할 수 있는)</span></div>
+    <div class="voc"><span class="w">fund</span><span class="pos">v. / n.</span><span class="mean">자금을 대다 / 기금</span><span class="deriv">funding (n. 자금 (제공))</span></div>
+    <div class="voc"><span class="w">influential</span><span class="pos">adj.</span><span class="mean">영향력 있는</span><span class="deriv">influence (n. / v. 영향(을 주다))</span></div>
+    <div class="voc"><span class="w">promote</span><span class="pos">v.</span><span class="mean">홍보하다, 촉진하다</span><span class="deriv">promotion (n. 홍보, 승진)</span></div>
+    <div class="voc"><span class="w">donor</span><span class="pos">n.</span><span class="mean">기부자, 기증자</span><span class="deriv">donate (v.), donation (n. 기부)</span></div>
+    <div class="voc"><span class="w">comprehensive</span><span class="pos">adj.</span><span class="mean">포괄적인, 종합적인</span><span class="deriv">comprehend (v. 이해하다)</span></div>
+    <div class="voc"><span class="w">accelerate</span><span class="pos">v.</span><span class="mean">가속하다, 촉진하다</span><span class="deriv">acceleration (n. 가속)</span></div>
+    <div class="voc"><span class="w">permission</span><span class="pos">n.</span><span class="mean">허가, 권한</span><span class="deriv">permit (v. 허가하다)</span></div>
+    <div class="voc"><span class="w">collaboration</span><span class="pos">n.</span><span class="mean">협업, 공동 작업</span><span class="deriv">collaborate (v. 협력하다)</span></div>
+    <div class="voc"><span class="w">compile</span><span class="pos">v.</span><span class="mean">(자료를) 모으다, 편집하다</span><span class="deriv">compilation (n. 편집)</span></div>
+    <div class="voc"><span class="w">available</span><span class="pos">adj.</span><span class="mean">이용 가능한</span><span class="deriv">availability (n. 이용 가능성)</span></div>
+    <div class="voc"><span class="w">participation</span><span class="pos">n.</span><span class="mean">참여</span><span class="deriv">participate (v.), participant (n. 참가자)</span></div>
+    <div class="voc"><span class="w">accumulate</span><span class="pos">v.</span><span class="mean">축적하다, 모으다</span><span class="deriv">accumulation (n. 축적)</span></div>
+    <div class="voc"><span class="w">detect</span><span class="pos">v.</span><span class="mean">탐지하다, 감지하다</span><span class="deriv">detection (n.), detective (n. 탐정)</span></div>
+    <div class="voc"><span class="w">voluntarily</span><span class="pos">adv.</span><span class="mean">자발적으로</span><span class="deriv">voluntary (adj.), volunteer (n. 자원봉사자)</span></div>
+    <div class="voc"><span class="w">contributor</span><span class="pos">n.</span><span class="mean">기여자, 공헌자</span><span class="deriv">contribute (v.), contribution (n.)</span></div>
+    <div class="voc"><span class="w">enhance</span><span class="pos">v.</span><span class="mean">강화하다, 향상시키다</span><span class="deriv">enhancement (n. 향상)</span></div>
+    <div class="voc"><span class="w">collective</span><span class="pos">adj.</span><span class="mean">집단의, 공동의</span><span class="deriv">collect (v.), collectively (adv.)</span></div>
+
+    <div class="exp-h">핵심 표현</div>
+
+    <div class="phrase"><span class="en">two heads are better than one</span> &nbsp;&mdash;&nbsp; 백지장도 맞들면 낫다</div>
+    <div class="phrase"><span class="en">come from</span> &nbsp;&mdash;&nbsp; ~에서 유래하다, 나오다</div>
+    <div class="phrase"><span class="en">be based on</span> &nbsp;&mdash;&nbsp; ~에 기반을 두다</div>
+    <div class="phrase"><span class="en">lead to</span> &nbsp;&mdash;&nbsp; ~로 이어지다, ~을 초래하다</div>
+    <div class="phrase"><span class="en">throughout history</span> &nbsp;&mdash;&nbsp; 역사 내내</div>
+    <div class="phrase"><span class="en">find out</span> &nbsp;&mdash;&nbsp; 알아내다, 알아보다</div>
+    <div class="phrase"><span class="en">one of the + 최상급 + 복수명사</span> &nbsp;&mdash;&nbsp; 가장 ~한 것들 중 하나</div>
+    <div class="phrase"><span class="en">afford to ~</span> &nbsp;&mdash;&nbsp; ~할 (금전적) 여유가 있다</div>
+    <div class="phrase"><span class="en">be targeted at</span> &nbsp;&mdash;&nbsp; ~을 겨냥하다, 대상으로 하다</div>
+    <div class="phrase"><span class="en">all together</span> &nbsp;&mdash;&nbsp; 모두 합쳐서, 다 같이</div>
+    <div class="phrase"><span class="en">enough to ~</span> &nbsp;&mdash;&nbsp; ~하기에 충분한</div>
+    <div class="phrase"><span class="en">be born from</span> &nbsp;&mdash;&nbsp; ~에서 생겨나다</div>
+    <div class="phrase"><span class="en">known as</span> &nbsp;&mdash;&nbsp; ~로 알려진</div>
+    <div class="phrase"><span class="en">be given to</span> &nbsp;&mdash;&nbsp; ~에게 주어지다</div>
+    <div class="phrase"><span class="en">by the end of</span> &nbsp;&mdash;&nbsp; ~의 말까지(는)</div>
+    <div class="phrase"><span class="en">thanks to</span> &nbsp;&mdash;&nbsp; ~덕분에</div>
+    <div class="phrase"><span class="en">another form of</span> &nbsp;&mdash;&nbsp; ~의 또 다른 형태</div>
+    <div class="phrase"><span class="en">respond to</span> &nbsp;&mdash;&nbsp; ~에 반응하다, 대응하다</div>
+    <div class="phrase"><span class="en">take advantage of</span> &nbsp;&mdash;&nbsp; ~을 활용하다, 이용하다</div>
+    <div class="phrase"><span class="en">than ever before / a lot more</span> &nbsp;&mdash;&nbsp; 그 어느 때보다 / 훨씬 더 많이</div>
+  </section>
+
+  <section class="tab" id="t4">
+    <div class="sec-h"><div class="badge">4</div><h2>전문해석</h2><span class="en">Full Translation</span></div>
+
+    <div class="trans-box">
+      <div class="subsec">크라우드소싱이란?</div>
+      <p>백지장도 맞들면 낫다는데, 그렇다면 수백 명이 머리를 맞대면 무엇을 이룰 수 있을까? 이 질문이 바로 크라우드소싱의 출발점이었다. '크라우드소싱'이라는 말은 '크라우드(군중)'와 '아웃소싱(외주)'이라는 두 단어가 합쳐져 생긴 것이다. 이는 많은 사람에게서 의견을 모으면 더 나은 해결책에 이를 수 있다는 믿음에 바탕을 둔다. '크라우드소싱'이라는 용어 자체는 2005년 한 잡지 편집자가 처음 만들었지만, 사람들은 역사 내내 이 방법을 써 왔다. 사람들이 크라우드소싱으로 어떻게 더 나은 해결책을 찾아왔는지 살펴보자.</p>
+
+      <div class="subsec">자유의 여신상은 어떻게 두 발로 설 수 있었을까?</div>
+      <p>자유의 여신상은 세계에서 가장 상징적인 기념물 중 하나다. 그러나 수많은 평범한 사람들의 노력이 없었다면, 이 웅장한 동상은 결코 미국의 대표 명소가 되지 못했을 것이다. 웅장한 자유의 여신상은 한 프랑스 조각가가 디자인했고, 1800년대 후반 프랑스 정부가 미국에 선물로 주었다. 그 동상은 조각난 상태로 뉴욕에 보내져 조립을 기다리고 있었다. 안타깝게도 미국 정부는 받침대를 세울 자금을 댈 여유가 없었고, 그래서 동상 조각들은 여러 달 동안 보관 상자 속에 방치되었다.</p>
+      <p>그때 조지프 퓰리처라는 영향력 있는 신문 편집자가 기발한 아이디어를 떠올렸다. 그는 자신의 신문을 이용해 일반 대중을 겨냥한 모금 캠페인을 펼쳤다. 단 5개월 만에 그 캠페인은 전국 12만 명이 넘는 기부자로부터 10만 달러 넘는 돈을 모았다. 기부금은 대부분 1달러도 안 되는 소액이었다. 그러나 그 돈을 모두 합치자 동상의 받침대를 짓는 비용을 충당하기에 충분했다. 심지어 조각가에게 선물을 줄 만큼의 돈까지 남았다!</p>
+
+      <div class="subsec">사람들은 어떻게 세계에서 가장 방대한 백과사전을 만들었을까?</div>
+      <p>거대한 온라인 백과사전인 위키피디아는 사실 누피디아라는 더 앞선 프로젝트에서 비롯되었다. 그 계획은 전문가들이 집필한 온라인 백과사전을 출판하는 것이었다. 그러나 큰 문제가 있었다. 내용이 너무 느리게 작성되어, 첫해 동안 단 21개의 글만 쓰였다. 콘텐츠 작성 속도를 높이기 위해 계획이 변경되었다. 위키피디아라는 새 프로젝트에서는 글을 쓰거나 편집할 권한이 전문가만이 아니라 인터넷을 쓸 수 있는 누구에게나 주어졌다. 협업의 규모는 놀라웠다. 첫해 말이 되자 위키피디아는 18개 언어로 된 2만 개가 넘는 글을 담게 되었다. 그 이후 그 사이트는 빠르게 성장하여, 250개가 넘는 언어로 작성된 4천만 개 이상의 글로 불어났다. 위키피디아는 매달 180억 회가 넘는 방문을 받으며, 이는 위키피디아를 인터넷에서 가장 인기 있는 사이트 중 하나로 만든다.</p>
+      <p>위키피디아는 전 세계 사람들이 무료로 공유되는 지식 기반을 구축할 수 있게 해 준다. 지식을 나누는 기쁨으로 하나가 된 위키피디아의 자원봉사 작성자와 편집자들은, 막대한 정보를 한곳에 모아 누구나 이용할 수 있게 만들었다. 그들 덕분에 우리는 함께 협력할 때 얼마나 많은 것을 이루고 배울 수 있는지 알게 된다.</p>
+
+      <div class="subsec">우리는 어떻게 기후 변화를 관측할까?</div>
+      <p>크라우드소싱의 또 다른 형태는 시민 과학으로, 이는 과학 연구에 대중이 참여하고 협력하는 활동이다. 시민 과학을 통해 사람들은 연구 프로젝트를 위해 자료를 모으고 지식을 공유한다. 시민 과학의 좋은 예는 미국의 '프로젝트 버드버스트'다. 전국 각지의 평범한 참가자들은 자기 지역에서 다양한 식물 종의 잎, 꽃, 열매가 처음 나타나는 시기에 관한 자료를 관찰하고 기록한다. 그런 다음 참가자들은 그 자료를 국가 데이터베이스로 보낸다. 과학자들은 축적된 자료를 이용해 개별 식물 종이 지역·권역·전국 단위에서 기후 변화에 어떻게 반응하는지 파악한다. 또한 과학자들은 그 결과를 과거 자료와 비교함으로써 기후 변화의 잠재적인 장기 영향을 감지하는 데 그 자료를 활용할 것이다.</p>
+      <p>수만 명의 기여자가 자발적으로 보낸 각각의 자료 표본은 엄청나게 소중하다. 사실 이렇게 거대한 규모의 연구는 크라우드소싱 없이는 불가능할 것이다.</p>
+
+      <div class="subsec">집단의 힘</div>
+      <p>오늘날 크라우드소싱은 소셜 미디어 네트워크와 심지어 특별히 설계된 크라우드소싱 플랫폼 같은 기술로 더욱 강화되고 있다. 그러한 네트워크와 플랫폼은 대중의 결합된 힘을 활용하는 일을 그 어느 때보다 쉽게 만든다. 이 집단의 힘은 우리 중 한 사람이 혼자 이룰 수 있는 것보다 훨씬 더 많은 것을 이루도록 우리를 돕는다.</p>
+    </div>
+  </section>
+
+  <section class="tab" id="t5">
+    <div class="sec-h"><div class="badge">5</div><h2>주제와 요지</h2><span class="en">Topic &amp; Main Idea</span></div>
+
+    <div class="tcard">
+      <div class="lab">TOPIC &middot; 주제</div>
+      <div class="big">여러 사람의 협력(크라우드소싱)이 더 나은 해결책을 만들어 낸 사례와 그 힘</div>
+      <div class="body">'백지장도 맞들면 낫다'는 발상에서 출발한 크라우드소싱이 역사 속에서 어떻게 더 나은 해결책을 이끌어 냈는지, 자유의 여신상&middot;위키피디아&middot;시민 과학의 세 사례로 보여 준다.</div>
+    </div>
+
+    <div class="tcard">
+      <div class="lab">MAIN IDEA &middot; 요지</div>
+      <div class="body">크라우드소싱은 많은 사람의 의견과 참여를 모아 더 나은 해결책을 찾는 방법으로, 자유의 여신상 받침대 모금, 위키피디아 집필, 시민 과학 같은 사례에서 그 힘이 입증되었다. 집단의 협력은 한 개인이 혼자 이룰 수 있는 것보다 훨씬 많은 것을 가능하게 한다.</div>
+    </div>
+
+    <div class="tcard">
+      <div class="lab">STRUCTURE &middot; 구조 흐름</div>
+      <div class="flow">
+        <div class="fstep"><div class="ph">도입 &middot; 개념 정의</div><div class="tx">'두 머리가 하나보다 낫다'는 질문에서 출발 &rarr; crowd + outsourcing = 크라우드소싱. 다수의 의견이 더 나은 해결책을 낳는다는 믿음.</div></div>
+        <div class="fstep"><div class="ph">사례 1 &middot; 자유의 여신상</div><div class="tx">받침대 자금 부족 &rarr; 퓰리처의 신문 모금 캠페인 &rarr; 12만여 명의 소액 기부로 받침대 완성.</div></div>
+        <div class="fstep"><div class="ph">사례 2 &middot; 위키피디아</div><div class="tx">전문가만 쓰던 누피디아의 한계 &rarr; 누구나 편집 가능한 위키피디아로 전환 &rarr; 폭발적 성장, 세계 최대 백과사전.</div></div>
+        <div class="fstep"><div class="ph">사례 3 + 결론 &middot; 시민 과학과 집단의 힘</div><div class="tx">프로젝트 버드버스트 등 대중 참여형 기후 연구 &rarr; 기술(SNS&middot;플랫폼)로 강화 &rarr; 집단의 힘이 혼자보다 훨씬 큰 성취를 가능하게 함.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab" id="t6">
+    <div class="sec-h"><div class="badge">6</div><h2>변형문제</h2><span class="en">Practice &middot; tap to answer</span></div>
+
+    <!-- Q1 주제 추론 -->
+    <div class="quiz" id="q1">
+      <div class="qhead"><span class="qno">1</span><span class="qtype">주제 추론</span></div>
+      <div class="qstem">다음 글의 주제로 가장 적절한 것은?</div>
+      <button class="opt" onclick="pick(this)">&#9312; 자유의 여신상이 완성되기까지의 건축 기술 발전 과정</button>
+      <button class="opt" onclick="pick(this)">&#9313; 위키피디아가 기존 백과사전을 대체하게 된 경제적 배경</button>
+      <button class="opt" data-correct="1" onclick="pick(this)">&#9314; 여러 사람의 협력(크라우드소싱)이 더 나은 해결책을 이끌어 낸 다양한 사례와 그 힘</button>
+      <button class="opt" onclick="pick(this)">&#9315; 시민 과학이 기후 변화 연구에서 갖는 한계와 문제점</button>
+      <button class="opt" onclick="pick(this)">&#9316; 소셜 미디어가 현대인의 의사소통 방식에 미친 영향</button>
+      <div class="explain" id="q1-ex">정답 &#9314; &mdash; 글은 크라우드소싱의 정의를 제시한 뒤, 자유의 여신상 모금&middot;위키피디아&middot;시민 과학이라는 세 가지 사례로 '집단의 협력이 더 나은 해결책을 만든다'는 점을 보여 준다. 개별 사례는 주제를 뒷받침하는 예시일 뿐이다.</div>
+      <div class="qbtns"><button class="reset" onclick="resetQuiz('q1')">&#8634; 다시풀기</button></div>
+    </div>
+
+    <!-- Q2 빈칸 추론 -->
+    <div class="quiz" id="q2">
+      <div class="qhead"><span class="qno">2</span><span class="qtype">빈칸 추론</span></div>
+      <div class="qstem">다음 빈칸에 들어갈 말로 가장 적절한 것은?</div>
+      <div class="qpassage">Crowdsourcing is based on the belief that getting input from a large group of people can lead to a __________ solution.</div>
+      <button class="opt" onclick="pick(this)">&#9312; <span class="en">cheaper</span></button>
+      <button class="opt" data-correct="1" onclick="pick(this)">&#9313; <span class="en">better</span></button>
+      <button class="opt" onclick="pick(this)">&#9314; <span class="en">faster</span></button>
+      <button class="opt" onclick="pick(this)">&#9315; <span class="en">simpler</span></button>
+      <button class="opt" onclick="pick(this)">&#9316; <span class="en">final</span></button>
+      <div class="explain" id="q2-ex">정답 &#9313; &mdash; 글 전체가 '많은 사람의 의견을 모으면 더 나은(better) 해결책을 얻는다'는 믿음을 반복해 강조한다. 더 싸거나 빠른 해결이 핵심이 아니라 '더 나은' 해결이 글의 일관된 메시지다.</div>
+      <div class="qbtns"><button class="reset" onclick="resetQuiz('q2')">&#8634; 다시풀기</button></div>
+    </div>
+
+    <!-- Q3 어법 오류 -->
+    <div class="quiz" id="q3">
+      <div class="qhead"><span class="qno">3</span><span class="qtype">어법 오류</span></div>
+      <div class="qstem">밑줄 친 부분 중 어법상 틀린 것은?</div>
+      <div class="qpassage">Ordinary participants in all parts of the country &#9312;<u>observe and record</u> data about the first appearance of leaves, flowers, and fruits. Then they send their data to a national database. Scientists use the accumulated data &#9313;<u>to learn</u> about how individual plant species &#9314;<u>respond to</u> climate changes. Each sample of data, &#9315;<u>sent in</u> voluntarily by tens of thousands of contributors, &#9316;<u>are</u> hugely valuable.</div>
+      <button class="opt" onclick="pick(this)">&#9312; <span class="en">observe and record</span></button>
+      <button class="opt" onclick="pick(this)">&#9313; <span class="en">to learn</span></button>
+      <button class="opt" onclick="pick(this)">&#9314; <span class="en">respond to</span></button>
+      <button class="opt" onclick="pick(this)">&#9315; <span class="en">sent in</span></button>
+      <button class="opt" data-correct="1" onclick="pick(this)">&#9316; <span class="en">are</span></button>
+      <div class="explain" id="q3-ex">정답 &#9316; &mdash; 주어가 'Each sample'(단수)이므로 동사도 단수 is가 되어야 한다. 중간에 삽입된 분사구(sent in ... by tens of thousands of contributors)의 복수명사 contributors에 현혹되어 are를 쓰면 안 된다. 나머지는 모두 적절(현재시제 병렬, 목적의 to부정사, respond to, 과거분사 삽입구).</div>
+      <div class="qbtns"><button class="reset" onclick="resetQuiz('q3')">&#8634; 다시풀기</button></div>
+    </div>
+
+    <!-- Q4 내용 불일치 -->
+    <div class="quiz" id="q4">
+      <div class="qhead"><span class="qno">4</span><span class="qtype">내용 불일치</span></div>
+      <div class="qstem">윗글의 내용과 일치하지 <b>않는</b> 것은?</div>
+      <button class="opt" onclick="pick(this)">&#9312; '크라우드소싱'이라는 용어는 2005년 한 잡지 편집자가 처음 만들었다.</button>
+      <button class="opt" onclick="pick(this)">&#9313; 자유의 여신상은 프랑스 정부가 미국에 선물로 준 것이다.</button>
+      <button class="opt" onclick="pick(this)">&#9314; 퓰리처의 모금 캠페인은 5개월 만에 12만 명이 넘는 기부자로부터 10만 달러 넘게 모았다.</button>
+      <button class="opt" data-correct="1" onclick="pick(this)">&#9315; 누피디아는 누구나 글을 쓰고 편집할 수 있도록 허용한 프로젝트였다.</button>
+      <button class="opt" onclick="pick(this)">&#9316; 프로젝트 버드버스트 참가자들은 식물의 잎&middot;꽃&middot;열매가 처음 나타나는 자료를 기록한다.</button>
+      <div class="explain" id="q4-ex">정답 &#9315; &mdash; 누피디아는 '전문가들이 집필'하는 계획이었고, 작성 속도가 너무 느린 것이 문제였다. 누구에게나 작성&middot;편집 권한을 준 것은 그 후속 프로젝트인 위키피디아다. 따라서 누피디아에 대한 설명으로는 본문과 일치하지 않는다.</div>
+      <div class="qbtns"><button class="reset" onclick="resetQuiz('q4')">&#8634; 다시풀기</button></div>
+    </div>
+
+    <!-- Q5 글의 순서 -->
+    <div class="quiz" id="q5">
+      <div class="qhead"><span class="qno">5</span><span class="qtype">글의 순서</span></div>
+      <div class="qstem">주어진 글 다음에 이어질 순서로 가장 적절한 것은?</div>
+      <div class="qpassage" style="border-left:4px solid #2E75B6;">The statue was sent to New York in pieces, awaiting assembly.</div>
+      <div class="qpassage"><b>(A)</b> Then an influential newspaper editor named Joseph Pulitzer had a brilliant idea. Using his newspaper, he promoted a fundraising campaign targeted at the general public.</div>
+      <div class="qpassage"><b>(B)</b> Unfortunately, the US government could not afford to fund a base for the statue, so the pieces lay in storage boxes for several months.</div>
+      <div class="qpassage"><b>(C)</b> In just five months, the campaign raised over $100,000 from more than 120,000 donors around the country.</div>
+      <button class="opt" onclick="pick(this)">&#9312; (A) - (B) - (C)</button>
+      <button class="opt" onclick="pick(this)">&#9313; (A) - (C) - (B)</button>
+      <button class="opt" data-correct="1" onclick="pick(this)">&#9314; (B) - (A) - (C)</button>
+      <button class="opt" onclick="pick(this)">&#9315; (B) - (C) - (A)</button>
+      <button class="opt" onclick="pick(this)">&#9316; (C) - (A) - (B)</button>
+      <div class="explain" id="q5-ex">정답 &#9314; &mdash; 동상이 조각난 채 도착한(주어진 글) 뒤, (B) 자금 부족으로 방치되는 '문제' &rarr; (A) 퓰리처가 모금 캠페인이라는 '해결책'을 시작 &rarr; (C) 그 캠페인의 '결과'(5개월 만에 모금 성공) 순서가 자연스럽다. (A)의 the campaign을 (C)가 이어받는다.</div>
+      <div class="qbtns"><button class="reset" onclick="resetQuiz('q5')">&#8634; 다시풀기</button></div>
+    </div>
+
+    <div class="exp-h">서술형</div>
+
+    <!-- 서술형 1 -->
+    <div class="essay">
+      <div class="qhead"><span class="qno">서술형 1</span><span class="qtype">빈칸 요약</span></div>
+      <div class="qstem">다음은 글의 내용을 요약한 것이다. 빈칸 (1), (2)에 들어갈 말을 본문에서 찾아 쓰시오.</div>
+      <div class="qpassage">Crowdsourcing is based on the belief that getting &nbsp;(1)__________ from a large group of people can lead to a better &nbsp;(2)__________. Throughout history, people have used this method to solve problems together.</div>
+      <div class="cond">조건: 본문에 나온 단어를 그대로 사용하여 각 빈칸에 한 단어씩 쓸 것.</div>
+      <textarea placeholder="(1) =            (2) =            처럼 답을 적어 보세요."></textarea>
+      <button class="ansbtn" onclick="toggleAns('e1')">모범답안 보기</button>
+      <div class="model" id="e1">
+        <span class="lab">모범답안</span>
+        (1) <span class="en">input</span> &nbsp;/&nbsp; (2) <span class="en">solution</span><br>
+        &rarr; 크라우드소싱은 많은 사람으로부터 '의견(input)'을 모으면 더 나은 '해결책(solution)'에 이를 수 있다는 믿음에 기반한다.
+      </div>
+    </div>
+
+    <!-- 서술형 2 -->
+    <div class="essay">
+      <div class="qhead"><span class="qno">서술형 2</span><span class="qtype">영어 서술</span></div>
+      <div class="qstem">위키피디아가 누피디아보다 훨씬 빠르게 성장할 수 있었던 이유는 무엇인가? 본문을 근거로 완전한 영어 문장으로 쓰시오.</div>
+      <div class="cond">조건: 본문 내용을 근거로, 25단어 내외의 완전한 영어 문장으로 작성할 것.</div>
+      <textarea placeholder="Write your answer in one complete English sentence."></textarea>
+      <button class="ansbtn" onclick="toggleAns('e2')">모범답안 보기</button>
+      <div class="model" id="e2">
+        <span class="lab">모범답안</span>
+        <span class="en">Unlike Nupedia, Wikipedia gave permission to write or edit articles to anyone with Internet access, not just experts, which greatly accelerated the writing of content.</span><br>
+        &rarr; 누피디아와 달리 위키피디아는 전문가뿐 아니라 인터넷을 쓸 수 있는 누구에게나 작성&middot;편집 권한을 주었고, 이것이 콘텐츠 작성 속도를 크게 높였다.
+      </div>
+    </div>
+
+  </section>
+
+  </main>
+
+<script>
+function showTab(id, btn){
+  var tabs = document.getElementsByClassName('tab');
+  for(var i=0;i<tabs.length;i++){ tabs[i].className = tabs[i].className.replace(' show',''); }
+  var t = document.getElementById(id);
+  if(t){ t.className += ' show'; }
+  var btns = document.querySelectorAll('.sb-nav button');
+  for(var j=0;j<btns.length;j++){ btns[j].className = btns[j].className.replace('active','').replace(/\s+$/,''); }
+  if(btn){ btn.className += ' active'; }
+  window.scrollTo(0,0);
+}
+
+function pick(el){
+  var quiz = el.parentNode;
+  var opts = quiz.getElementsByClassName('opt');
+  for(var i=0;i<opts.length;i++){
+    opts[i].className += ' locked';
+    opts[i].setAttribute('onclick','');
+  }
+  if(el.getAttribute('data-correct') === '1'){
+    el.className += ' correct';
+  } else {
+    el.className += ' wrong';
+    for(var k=0;k<opts.length;k++){
+      if(opts[k].getAttribute('data-correct') === '1'){ opts[k].className += ' correct'; }
+    }
+  }
+  var ex = document.getElementById(quiz.id + '-ex');
+  if(ex){ ex.className += ' show'; }
+}
+
+function resetQuiz(qid){
+  var quiz = document.getElementById(qid);
+  var opts = quiz.getElementsByClassName('opt');
+  for(var i=0;i<opts.length;i++){
+    opts[i].className = 'opt';
+    opts[i].setAttribute('onclick','pick(this)');
+  }
+  var ex = document.getElementById(qid + '-ex');
+  if(ex){ ex.className = 'explain'; }
+}
+
+function toggleAns(id){
+  var m = document.getElementById(id);
+  if(!m){ return; }
+  if(m.className.indexOf('show') > -1){ m.className = 'model'; }
+  else { m.className = 'model show'; }
+}
+</script>
+</body>
+</html>
